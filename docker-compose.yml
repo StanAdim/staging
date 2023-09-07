@@ -1,0 +1,24 @@
+services:
+
+  staging-app:
+    container_name: staging-app
+    build: .
+    volumes:
+      - ./staging-app:/var/www/html
+    ports:
+      - 9010:80
+  
+  mysql_db:
+    image: mysql:8.0.33
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: staging_app
+    ports:
+    - 3306:3306
+  
+  phpmyadmin:
+    image: phpmyadmin:5.2.1
+    ports:
+      - 9011:80
+    environment:
+      - PMA_ARBITRARY=1
