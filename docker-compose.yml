@@ -4,10 +4,13 @@ services:
 
   staging-app:
     container_name: staging-app
-    args:
-        - user: adim
-        - uid: 1010
-    build: .
+    
+    build:
+      context: .
+      args:
+          - user: adim
+          - uid: 1010
+
     volumes:
       - ./staging-app:/var/www/html
     ports:
