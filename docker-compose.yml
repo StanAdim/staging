@@ -4,11 +4,10 @@ services:
 
   staging-app:
     container_name: staging-app
-    
     build:
       context: .
       args:
-          - user: adim
+          - user: "adim"
           - uid: 1010
 
     volumes:
