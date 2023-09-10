@@ -7,8 +7,8 @@ services:
     build:
       context: .
       args:
-          - user: "adim"
-          - uid: 1010
+          - user = adim
+          - uid = 1000
 
     volumes:
       - ./staging-app:/var/www/html
