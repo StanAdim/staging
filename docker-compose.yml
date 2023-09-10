@@ -5,8 +5,8 @@ services:
   staging-app:
     container_name: staging-app
     args:
-        user: adim
-        uid: 1010
+        - user: adim
+        - uid: 1010
     build: .
     volumes:
       - ./staging-app:/var/www/html
