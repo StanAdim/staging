@@ -1,6 +1,12 @@
 FROM php:8.2-apache
 WORKDIR /var/www/html
 
+# Arguments defined in docker-compose.yml
+ARG user
+ARG uid
+
+
+
 # Mod Rewrite
 RUN a2enmod rewrite
 
@@ -16,6 +22,8 @@ RUN apt-get update -y && apt-get install -y \
     libjpeg62-turbo-dev \
     libpng-dev
 
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 # Composer
 COPY --from=composer:2.2.6 /usr/bin/composer /usr/bin/composer
 
@@ -24,5 +32,13 @@ RUN docker-php-ext-install gettext intl pdo_mysql gd
 
 RUN docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd
+
+# Create system user to run Composer and Artisan Commands
+RUN useradd -G www-data,root -u $uid -d /home/$user $user
+RUN mkdir -p /home/$user/.composer && \
+    chown -R $user:$user /home/$user
+
+USER $user
+
 EXPOSE 80
 # node installation 
