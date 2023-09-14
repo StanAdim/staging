@@ -1,7 +1,3 @@
 RewriteEngine On
 RewriteCond %{REQUEST_URI} !^/public/
-<<<<<<< HEAD
 RewriteRule ^(.*)$ /public/$1 [L,QSA]
-=======
-RewriteRule ^(.*)$ /public/$1 [L,QSA]
->>>>>>> b53071d (Index page)
